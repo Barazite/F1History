@@ -12,7 +12,8 @@ struct F1HistoryApp: App {
     var body: some Scene {
         WindowGroup {
             //ContentView()
-            SeasonsCoordinator.navigation()
+            //SeasonsCoordinator.navigation()
+            DriversCoordinator.navigation()
         }
     }
 }

@@ -1,30 +1,30 @@
 //
-//  SeasonsProvider.swift
+//  DriversProvider.swift
 //  F1History
 //
-//  Created by Adrian Sevilla Diaz on 5/7/21.
+//  Created by Adrian Sevilla Diaz on 7/7/21.
 //
 
 import Foundation
 import Combine
 
-protocol SeasonsProviderProtocol {
-    func fetchSeasons(offset: String, completionHandler: @escaping (Result<SeasonsServerModel, NetworkingError>) -> ())
+protocol DriversProviderProtocol {
+    func fetchDrivers(offset: String, completionHandler: @escaping (Result<DriversServerModel, NetworkingError>) -> ())
 }
 
-class SeasonsProviderImpl: SeasonsProviderProtocol{
+class DriversProviderImpl: DriversProviderProtocol{
     let provider: RequestManagerProtocol = RequestManager()
     var cancellable: Set<AnyCancellable> = []
     
-    internal func fetchSeasons(offset: String, completionHandler: @escaping (Result<SeasonsServerModel, NetworkingError>) -> ()) {
+    internal func fetchDrivers(offset: String, completionHandler: @escaping (Result<DriversServerModel, NetworkingError>) -> ()) {
             
         let aux: [CVarArg] = [offset]
-        let endpointComplete = String(format: URLEndpoint.endpointSeasons, arguments: aux)
+        let endpointComplete = String(format: URLEndpoint.endpointDrivers, arguments: aux)
         let request = RequestDTO(params: nil,
                                  method: .get,
                                  endpoint: URLEndpoint.baseUrl+endpointComplete)
         
-        self.provider.requestGeneric(requestDto: request, entityClass: SeasonsServerModel.self)
+        self.provider.requestGeneric(requestDto: request, entityClass: DriversServerModel.self)
             .sink { [weak self] (completion) in
                 guard self != nil else { return }
                 switch completion {
@@ -33,9 +33,9 @@ class SeasonsProviderImpl: SeasonsProviderProtocol{
                 case .failure(let error):
                     completionHandler(.failure(error))
                 }
-            } receiveValue: { [weak self] responseConsejosModel in
+            } receiveValue: { [weak self] response in
                 guard self != nil else { return }
-                completionHandler(.success(responseConsejosModel))
+                completionHandler(.success(response))
             }.store(in: &cancellable)
     }
 }

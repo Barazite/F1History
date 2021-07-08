@@ -46,22 +46,10 @@ struct RequestDTO{
 
 struct URLEndpoint {
     static let baseUrl = "https://ergast.com/api/f1/"
-    static let endpointSeasons = "seasons.json?offset=%@"     
-}
-
-
-class Utils {
-    static let jsonDecoder: JSONDecoder = {
-        let jsonDecoder = JSONDecoder()
-        jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-        jsonDecoder.dateDecodingStrategy = .formatted(dateFormatt)
-        return jsonDecoder
-    }()
+    static let endpointSeasons = "seasons.json?offset=%@"
+    static let endpointDrivers = "drivers.json?offset=%@"
+    static let endpointConstructors = "constructors.json?offset=%@"
     
-    static let dateFormatt: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-mm-dd"
-        return dateFormatter
-    }()
-
 }
+
+
