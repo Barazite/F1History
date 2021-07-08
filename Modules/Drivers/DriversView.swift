@@ -24,8 +24,9 @@ struct DriversView: View {
                     DriverCard(item: item)
                         .onAppear(perform: {
                             if self.presenter.arrayDrivers.last?.id == item.id {
-                                self.presenter.fetchDrivers()
-                                print(self.presenter.arrayDrivers.count)
+                                if !self.presenter.finalList{
+                                    self.presenter.fetchDrivers()
+                                }
                             }
                         })
                 }

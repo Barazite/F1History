@@ -13,7 +13,8 @@ struct F1HistoryApp: App {
         WindowGroup {
             //ContentView()
             //SeasonsCoordinator.navigation()
-            DriversCoordinator.navigation()
+            //DriversCoordinator.navigation()
+            ConstructorsCoordinator.navigation()
         }
     }
 }

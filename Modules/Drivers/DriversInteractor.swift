@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 protocol DriversInteractorInputProtocol: BaseInteractorInputProtocol {
     func fetchDataDriversInteractor(offset: String)
 }
