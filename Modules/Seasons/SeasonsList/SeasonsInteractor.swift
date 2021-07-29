@@ -22,7 +22,7 @@ extension SeasonsInteractorImpl: SeasonsInteractorInputProtocol{
                 guard self != nil else { return }
                 switch result{
                 case .success(let response):
-                    self?.presenter?.seasonsFromInteractor(data: response.mrData?.seasonTable?.seasons ?? [], total: (response.mrData?.total as! NSString).integerValue, limit: (response.mrData?.limit as! NSString).integerValue)
+                    self?.presenter?.seasonsFromInteractor(data: response.mrData?.seasonTable?.seasons ?? [], total: ((response.mrData?.total!)! as NSString).integerValue, limit: ((response.mrData?.limit!)! as NSString).integerValue)
                 case .failure(let error):
                     debugPrint(error.localizedDescription)
                 }

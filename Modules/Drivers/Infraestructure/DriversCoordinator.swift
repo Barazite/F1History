@@ -21,5 +21,4 @@ final class DriversCoordinator: BaseCoordinator{
         view.presenter = vip.presenter
         return view
     }
-    
 }

@@ -49,7 +49,7 @@ struct URLEndpoint {
     static let endpointSeasons = "seasons.json?offset=%@"
     static let endpointDrivers = "drivers.json?offset=%@"
     static let endpointConstructors = "constructors.json?offset=%@"
-    
+    static let endpointCircuits = "circuits.json?offset=%@"
 }
 
 

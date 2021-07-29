@@ -31,7 +31,6 @@ struct ConstructorsView: View {
         .onAppear(perform: {
             self.presenter.fetchConstructors()
         })
-        .navigationTitle("Constructors")
     }
     
 }

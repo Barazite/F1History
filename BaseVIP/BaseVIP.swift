@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol BaseInteractorInputProtocol: class{
+protocol BaseInteractorInputProtocol: AnyObject{
     
 }
 
-protocol BaseInteractorOutputProtocol: class {
+protocol BaseInteractorOutputProtocol: AnyObject {
     
 }
 

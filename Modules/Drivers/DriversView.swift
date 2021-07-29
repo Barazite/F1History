@@ -35,7 +35,6 @@ struct DriversView: View {
         .onAppear(perform: {
             self.presenter.fetchDrivers()
         })
-        .navigationTitle("Drivers")
     }
 }
 

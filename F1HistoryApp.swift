@@ -14,7 +14,8 @@ struct F1HistoryApp: App {
             //ContentView()
             //SeasonsCoordinator.navigation()
             //DriversCoordinator.navigation()
-            ConstructorsCoordinator.navigation()
+            //ConstructorsCoordinator.navigation()
+            CircuitsCoordinator.buildView()
         }
     }
 }
