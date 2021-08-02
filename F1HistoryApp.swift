@@ -11,11 +11,7 @@ import SwiftUI
 struct F1HistoryApp: App {
     var body: some Scene {
         WindowGroup {
-            //ContentView()
-            //SeasonsCoordinator.navigation()
-            //DriversCoordinator.navigation()
-            //ConstructorsCoordinator.navigation()
-            CircuitsCoordinator.buildView()
+            HomeTabView()
         }
     }
 }
