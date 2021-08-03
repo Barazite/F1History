@@ -50,8 +50,6 @@ struct SeasonsView: View {
                     })
                 }
             }
-            //.listStyle(InsetListStyle())
-            //.navigationTitle("Seasons")
         }
     }
 }

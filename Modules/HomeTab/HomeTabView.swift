@@ -9,8 +9,9 @@ import SwiftUI
 
 struct HomeTabView: View {
     
-    @State var selected = "Seasons"
-    @State var xAxis: CGFloat = 45
+    @State private var selected = "Seasons"
+    @State private var xAxis: CGFloat = 45
+    @State private var showSlide = false
     
     init() {
         UITabBar.appearance().isHidden = true
@@ -20,43 +21,60 @@ struct HomeTabView: View {
     
     var body: some View {
         NavigationView{
-            VStack(){
-                TabView(selection: $selected){
-                    SeasonsCoordinator.buildView()
-                        .tag("Seasons")
+            GeometryReader{ geometry in
+                ZStack(alignment: .leading) {
+                    VStack(){
+                        TabView(selection: $selected){
+                            SeasonsCoordinator.buildView()
+                                .tag("Seasons")
+                            
+                            DriversCoordinator.buildView()
+                                .tag("Drivers")
+                            
+                            ConstructorsCoordinator.buildView()
+                                .tag("Constructors")
+                            
+                            CircuitsCoordinator.buildView()
+                                .tag("Circuits")
+                            
+                        }
+                        //.tabViewStyle(PageTabViewStyle())
+                        //.indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+                        
+                        CustomTabBar(selectedTab: $selected, xAxis: $xAxis)
+                            .padding(.bottom, 15)
+                        
+                        
+                    }
                     
-                    DriversCoordinator.buildView()
-                        .tag("Drivers")
-                    
-                    ConstructorsCoordinator.buildView()
-                        .tag("Constructors")
-                    
-                    CircuitsCoordinator.buildView()
-                        .tag("Circuits")
-                    
+                    SliderMenuView()
+                        .frame(width: geometry.size.width * 3/4)
+                        .offset(x: self.showSlide ? 0 : -geometry.size.width)
+                        .animation(.default)
                 }
-                //.tabViewStyle(PageTabViewStyle())
-                //.indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
-                
-                CustomTabBar(selectedTab: $selected, xAxis: $xAxis)
-                    .padding(.bottom, 15)
-                    
-
+                /*.animation(Animation.easeIn.delay(0.25))
+                .gesture(DragGesture().onEnded({ (drag) in
+                    if drag.translation.width < -100{
+                        self.showSlide = false
+                    }else{
+                        self.showSlide = true
+                    }
+                }))*/
+                .ignoresSafeArea(.all, edges: .bottom)
+                .navigationBarTitle("F1 History", displayMode: .inline)
+                .navigationBarItems(leading:
+                                        Button(action: {
+                                            self.showSlide.toggle()
+                                        }, label: {
+                                            Image(systemName: "slider.horizontal.3")
+                                                .resizable()
+                                                .foregroundColor(.white)
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: 30, height: 30)
+                                            
+                                        })
+                )
             }
-            .ignoresSafeArea(.all, edges: .bottom)
-            .navigationBarTitle("F1 History", displayMode: .inline)
-            .navigationBarItems(leading:
-                                    Button(action: {
-                                        
-                                    }, label: {
-                                        Image(systemName: "slider.horizontal.3")
-                                            .resizable()
-                                            .foregroundColor(.white)
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: 30, height: 30)
-                                        
-                                    })
-            )
         }
     }
 }
