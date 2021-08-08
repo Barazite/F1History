@@ -11,15 +11,15 @@ struct DriversView: View {
     
     @ObservedObject var presenter = DriversPresenterImpl()
     
-    /*init(){
-        self.presenter.fetchDrivers()
-    }*/
-    
     var body: some View {
-        List{
-            if self.presenter.arrayDrivers.isEmpty{
-                ProgressView()
-            }else{
+        
+        if self.presenter.arrayDrivers.isEmpty{
+            ProgressView("Loading")
+                .onAppear(perform: {
+                    self.presenter.fetchDrivers()
+                })
+        }else{
+            List{
                 ForEach(self.presenter.arrayDrivers){ item in
                     DriverCard(item: item)
                         .onAppear(perform: {
@@ -32,9 +32,6 @@ struct DriversView: View {
                 }
             }
         }
-        .onAppear(perform: {
-            self.presenter.fetchDrivers()
-        })
     }
 }
 

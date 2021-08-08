@@ -12,10 +12,14 @@ struct ConstructorsView: View {
     @ObservedObject var presenter = ConstructorsPresenterImpl()
     
     var body: some View {
-        List{
-            if self.presenter.arrayConstructors.isEmpty{
-                ProgressView()
-            }else{
+        
+        if self.presenter.arrayConstructors.isEmpty{
+            ProgressView()
+                .onAppear(perform: {
+                    self.presenter.fetchConstructors()
+                })
+        }else{
+            List{
                 ForEach(self.presenter.arrayConstructors){ item in
                     ConstructorCard(item: item)
                         .onAppear(perform: {
@@ -28,11 +32,7 @@ struct ConstructorsView: View {
                 }
             }
         }
-        .onAppear(perform: {
-            self.presenter.fetchConstructors()
-        })
     }
-    
 }
 
 struct ConstructorsView_Previews: PreviewProvider {

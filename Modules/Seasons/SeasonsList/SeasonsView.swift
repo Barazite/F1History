@@ -14,40 +14,27 @@ struct SeasonsView: View {
     var body: some View {
         
         if self.presenter.arraySeasons.isEmpty{
-            VStack(alignment: .center){
-                ProgressView("Loading")
-            }
-            .onAppear(perform: {
-                self.presenter.fetchSeasons()
-            })
+            ProgressView("Loading")
+                .onAppear(perform: {
+                    self.presenter.fetchSeasons()
+                })
         }else{
-            List{
+            ScrollView{
                 LazyVGrid(columns: Array(repeating: GridItem(), count: 2)){
-                    ForEach(self.presenter.arraySeasons){ item in
+                    ForEach(self.presenter.arraySeasons){ season in
                         NavigationLink(
-                            destination: /*@START_MENU_TOKEN@*/Text("Destination")/*@END_MENU_TOKEN@*/){
-                                ZStack{
-                                    Text(item.season!)
-                                        .foregroundColor(Color(red: 239/255, green: 184/255, blue: 16/255))
-                                        .font(.title)
-                                    Image("y2")
-                                        .resizable()
-                                        .frame(width: 100, height: 100)
-                                }
-                                //background(Color.gray)
+                            destination: SeasonsDetailsCoordinator.buildView(season: season.season ?? "")){
+                            SeasonCard(item: season)
                                 .padding()
-                            }
+                                .onAppear(perform: {
+                                    if self.presenter.arraySeasons.last?.id == season.id {
+                                        if !self.presenter.finalList{
+                                            self.presenter.fetchSeasons()
+                                        }
+                                    }
+                                })
+                        }
                     }
-                }
-                if !self.presenter.finalList{
-                    HStack{
-                        Spacer()
-                        ProgressView("Loading")
-                        Spacer()
-                    }
-                    .onAppear(perform: {
-                        self.presenter.fetchSeasons()
-                    })
                 }
             }
         }
@@ -57,5 +44,21 @@ struct SeasonsView: View {
 struct SeasonsView_Previews: PreviewProvider {
     static var previews: some View {
         SeasonsView()
+    }
+}
+
+struct SeasonCard: View{
+    
+    var item: Seasons
+    
+    var body: some View{
+        ZStack{
+            Text(item.season!)
+                .foregroundColor(Color(red: 239/255, green: 184/255, blue: 16/255))
+                .font(.title)
+            Image("y2")
+                .resizable()
+                .frame(width: 100, height: 100)
+        }
     }
 }

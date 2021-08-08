@@ -12,10 +12,14 @@ struct CircuitsView: View {
     @ObservedObject var presenter = CircuitsPresenterImpl()
     
     var body: some View {
-        List{
-            if self.presenter.arrayCircuits.isEmpty{
-                ProgressView()
-            }else{
+        
+        if self.presenter.arrayCircuits.isEmpty{
+            ProgressView("Loading")
+                .onAppear(perform: {
+                    self.presenter.fetchCircuits()
+                })
+        }else{
+            List{
                 ForEach(self.presenter.arrayCircuits){ item in
                     CircuitCard(item: item)
                         .onAppear(perform: {
@@ -28,9 +32,6 @@ struct CircuitsView: View {
                 }
             }
         }
-        .onAppear(perform: {
-            self.presenter.fetchCircuits()
-        })
     }
 }
 

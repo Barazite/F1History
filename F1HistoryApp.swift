@@ -12,6 +12,10 @@ struct F1HistoryApp: App {
     var body: some Scene {
         WindowGroup {
             HomeTabView()
+//            DriversCoordinator.buildView()
+//            SeasonsCoordinator.navigation()
+//            CircuitsCoordinator.buildView()
+//            ConstructorsCoordinator.buildView()
         }
     }
 }
