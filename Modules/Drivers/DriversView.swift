@@ -21,7 +21,7 @@ struct DriversView: View {
         }else{
             List{
                 ForEach(self.presenter.arrayDrivers){ item in
-                    DriverCard(item: item)
+                    DriverCard(item: item).buttonStyle(PlainButtonStyle())
                         .onAppear(perform: {
                             if self.presenter.arrayDrivers.last?.id == item.id {
                                 if !self.presenter.finalList{
@@ -45,6 +45,7 @@ struct DriverCard: View {
     
     var driver : Drivers
     @ObservedObject var presenter = DriversPresenterImpl()
+    @State var showWiki = false
     
     init(item: Drivers){
         self.driver = item
@@ -71,12 +72,20 @@ struct DriverCard: View {
                 Spacer()
                 
                 Button(action: {
-                    
+                    showWiki.toggle()
                 }, label: {
                     Image("wikipedia")
                         .resizable()
                         .frame(width: 40, height: 40)
-                }).foregroundColor(.yellow)
+                })
+                .foregroundColor(.yellow)
+                .sheet(isPresented: $showWiki, onDismiss: {
+                    
+                }){
+                    WebViewHome(showWiki: $showWiki, url: driver.url!)
+                }
+                
+                
                 
             }.padding(.all, 8)
             

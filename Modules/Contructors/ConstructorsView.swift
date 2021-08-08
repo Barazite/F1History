@@ -21,7 +21,7 @@ struct ConstructorsView: View {
         }else{
             List{
                 ForEach(self.presenter.arrayConstructors){ item in
-                    ConstructorCard(item: item)
+                    ConstructorCard(item: item).buttonStyle(PlainButtonStyle())
                         .onAppear(perform: {
                             if self.presenter.arrayConstructors.last?.id == item.id {
                                 if !self.presenter.finalList{
@@ -44,6 +44,7 @@ struct ConstructorsView_Previews: PreviewProvider {
 struct ConstructorCard: View {
     
     var constructor: Constructors
+    @State var showWiki = false
     
     init(item: Constructors){
         self.constructor = item
@@ -63,12 +64,16 @@ struct ConstructorCard: View {
                 Spacer()
                 
                 Button(action: {
-                    
+                    showWiki.toggle()
                 }, label: {
                     Image("wikipedia")
                         .resizable()
                         .frame(width: 40, height: 40)
-                }).foregroundColor(.yellow)
+                })
+                .foregroundColor(.yellow)
+                .sheet(isPresented: $showWiki, onDismiss: didDismiss){
+                    WebViewHome(showWiki: $showWiki, url: constructor.url!)
+                }
             }
             .padding(.all, 8)
             
@@ -90,5 +95,9 @@ struct ConstructorCard: View {
         }
         .padding()
         .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.black, lineWidth: 1).padding(.all, 5))
+    }
+    
+    func didDismiss() {
+        
     }
 }
