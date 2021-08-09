@@ -21,14 +21,17 @@ struct CircuitsView: View {
         }else{
             List{
                 ForEach(self.presenter.arrayCircuits){ item in
-                    CircuitCard(item: item)
-                        .onAppear(perform: {
-                            if self.presenter.arrayCircuits.last?.id == item.id {
-                                if !self.presenter.finalList{
-                                    self.presenter.fetchCircuits()
+                    NavigationLink(
+                        destination: CircuitDetailsCoordinator.buildView(circuit: item)){
+                        CircuitCard(item: item)
+                            .onAppear(perform: {
+                                if self.presenter.arrayCircuits.last?.id == item.id {
+                                    if !self.presenter.finalList{
+                                        self.presenter.fetchCircuits()
+                                    }
                                 }
-                            }
-                        })
+                            })
+                    }
                 }
             }
         }

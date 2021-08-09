@@ -27,7 +27,7 @@ class BaseInteractor{
 
 class BaseCoordinator{
     
-    static func assembly<Presenter: BasePresenter, Interactor: BaseInteractor>(presenter: Presenter.Type, interactor: Interactor.Type) -> (presenter: Presenter, interactor: Interactor){
+    static func assembly<Presenter: BasePresenter, Interactor: BaseInteractor>(presenter: Presenter.Type, interactor: Interactor.Type?) -> (presenter: Presenter, interactor: Interactor){
         let basePresenter = Presenter()
         let baseInteractor = Interactor()
         basePresenter.baseInteractor = baseInteractor as? BaseInteractorInputProtocol
