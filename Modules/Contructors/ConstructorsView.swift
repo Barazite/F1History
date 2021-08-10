@@ -14,7 +14,7 @@ struct ConstructorsView: View {
     var body: some View {
         
         if self.presenter.arrayConstructors.isEmpty{
-            ProgressView()
+            ProgressView("Loading")
                 .onAppear(perform: {
                     self.presenter.fetchConstructors()
                 })

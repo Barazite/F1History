@@ -56,7 +56,6 @@ struct CircuitDetailsView: View {
             }.padding()
             
             MapCircuit(circuit: self.presenter.circuit!)
-                //.frame(height: 500)
                 .frame(maxWidth: .infinity)
                 .ignoresSafeArea(edges: .horizontal)
         }

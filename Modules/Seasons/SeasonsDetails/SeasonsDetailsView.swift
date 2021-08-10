@@ -63,7 +63,9 @@ struct SeasonsDetailsView: View {
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             }
             .onAppear(perform: {
-                self.presenter.fetchData()
+                self.presenter.fetchSchedules()
+                self.presenter.fetchDrivers()
+                self.presenter.fetchConstructors()
             })
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading:
@@ -95,6 +97,13 @@ struct ScheduleList: View{
                 List{
                     ForEach(presenter.arraySchedule){ race in
                         DateRace(race: race)
+                            .onAppear(perform: {
+                                if self.presenter.arraySchedule.last?.id == race.id{
+                                    if !self.presenter.finalScheduleList{
+                                        self.presenter.fetchSchedules()
+                                    }
+                                }
+                            })
                             .buttonStyle(PlainButtonStyle())
                     }
                 }
@@ -115,6 +124,13 @@ struct DriversList: View{
                 List{
                     ForEach(presenter.arrayDrivers){ driver in
                         DriverPosition(driver: driver)
+                            .onAppear(perform: {
+                                if self.presenter.arrayDrivers.last?.id == driver.id{
+                                    if !self.presenter.finalDriverList{
+                                        self.presenter.fetchDrivers()
+                                    }
+                                }
+                            })
                             .buttonStyle(PlainButtonStyle())
                     }
                 }
@@ -136,6 +152,13 @@ struct ConstructorsList: View{
                 List{
                     ForEach(presenter.arrayConstructors){ constructor in
                         ConstructorPosition(constructor: constructor)
+                            .onAppear(perform: {
+                                if self.presenter.arrayConstructors.last?.id == constructor.id{
+                                    if !self.presenter.finalConstructorList{
+                                        self.presenter.fetchConstructors()
+                                    }
+                                }
+                            })
                             .buttonStyle(PlainButtonStyle())
                     }
                 }

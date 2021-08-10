@@ -50,9 +50,9 @@ struct URLEndpoint {
     static let endpointDrivers = "drivers.json?offset=%@"
     static let endpointConstructors = "constructors.json?offset=%@"
     static let endpointCircuits = "circuits.json?offset=%@"
-    static let endpointSchedule = "%@.json"
-    static let endpointDriverStandings = "%@/driverStandings.json"
-    static let endpointConstructorStandings = "%@/constructorStandings.json"
+    static let endpointSchedule = "%@.json?offset=%@"
+    static let endpointDriverStandings = "%@/driverStandings.json?offset=%@"
+    static let endpointConstructorStandings = "%@/constructorStandings.json?offset=%@"
 }
 
 
