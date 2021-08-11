@@ -44,10 +44,12 @@ struct ConstructorsView_Previews: PreviewProvider {
 struct ConstructorCard: View {
     
     var constructor: Constructors
+    @ObservedObject var imageManager = ImageManager()
     @State var showWiki = false
     
     init(item: Constructors){
         self.constructor = item
+        self.imageManager.getFlagFromUrl(imageUrl: self.imageManager.getUrl(nation: item.nationality ?? ""))
     }
     
     var body: some View{
@@ -85,10 +87,10 @@ struct ConstructorCard: View {
             
             HStack{
                 Spacer()
-                Image(systemName: "photo")
+                Image(uiImage: (self.imageManager.flag.isEmpty ? UIImage(systemName: "photo") : UIImage(data: self.imageManager.flag))!)
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 100, height: 70)
+                    .frame(width: 100, height: 80)
+                    .scaledToFill()
                 Spacer()
             }
             .padding(.all, 8)

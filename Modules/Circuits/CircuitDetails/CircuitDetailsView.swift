@@ -12,6 +12,7 @@ struct CircuitDetailsView: View {
     
     @SwiftUI.Environment(\.presentationMode) var presentMode
     @ObservedObject var presenter = CircuitDetailsPresenterImpl()
+    @ObservedObject var imageManager = ImageManager()
     @State var showWiki = false
     
     
@@ -49,16 +50,19 @@ struct CircuitDetailsView: View {
             HStack(){
                 Text(self.presenter.circuit?.locality ?? "").font(.title3)
                 Spacer()
-                Image(systemName: "photo")
+                Image(uiImage: (self.imageManager.flag.isEmpty ? UIImage(systemName: "photo") : UIImage(data: self.imageManager.flag))!)
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 100, height: 70)
+                    .frame(width: 100, height: 80)
+                    .scaledToFill()
             }.padding()
             
             MapCircuit(circuit: self.presenter.circuit!)
                 .frame(maxWidth: .infinity)
                 .ignoresSafeArea(edges: .horizontal)
         }
+        .onAppear(perform: {
+            self.imageManager.getFlagFromUrl(imageUrl: self.imageManager.getUrl(nation: self.presenter.circuit?.country ?? ""))
+        })
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading:
                                 Button(action: {

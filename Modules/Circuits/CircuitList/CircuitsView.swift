@@ -48,9 +48,11 @@ struct CircuitsView_Previews: PreviewProvider {
 struct CircuitCard: View {
     
     var circuit: Circuits
+    @ObservedObject var imageManager = ImageManager()
     
     init(item: Circuits) {
         self.circuit = item
+        self.imageManager.getFlagFromUrl(imageUrl: self.imageManager.getUrl(nation: item.country ?? ""))
     }
     
     var body: some View{
@@ -59,10 +61,10 @@ struct CircuitCard: View {
                     .multilineTextAlignment(.center)
                     .padding()
                 
-                Image(systemName: "photo")
+                Image(uiImage: (self.imageManager.flag.isEmpty ? UIImage(systemName: "photo") : UIImage(data: self.imageManager.flag))!)
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 100, height: 70)
+                    .frame(width: 100, height: 80)
+                    .scaledToFill()
                     .padding()
                 
             }

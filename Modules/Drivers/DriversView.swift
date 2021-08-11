@@ -44,12 +44,13 @@ struct DriversView_Previews: PreviewProvider {
 struct DriverCard: View {
     
     var driver : Drivers
-    @ObservedObject var presenter = DriversPresenterImpl()
+    @ObservedObject var imageManager = ImageManager()
     @State var showWiki = false
     
     init(item: Drivers){
         self.driver = item
-        self.presenter.getImageFromUrl()
+        self.imageManager.getFlagFromUrl(imageUrl: self.imageManager.getUrl(nation: item.nationality ?? ""))
+        self.imageManager.getImageFromUrl()
     }
     
     var body: some View{
@@ -90,7 +91,7 @@ struct DriverCard: View {
             }.padding(.all, 8)
             
             HStack{
-                Image(uiImage: ((self.presenter.data.isEmpty) ? UIImage(systemName: "person.fill") : UIImage(data: self.presenter.data))!)
+                Image(uiImage: (self.imageManager.data.isEmpty ? UIImage(systemName: "person.fill") : UIImage(data: self.imageManager.data))!)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 100, height: 100)
@@ -107,10 +108,10 @@ struct DriverCard: View {
                 }
                 Spacer()
                 
-                Image(systemName: "photo")
+                Image(uiImage: (self.imageManager.flag.isEmpty ? UIImage(systemName: "photo") : UIImage(data: self.imageManager.flag))!)
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 70, height: 50)
+                    .frame(width: 70, height: 60)
+                    .scaledToFill()
                 
             }.padding(.all, 8)
         }
