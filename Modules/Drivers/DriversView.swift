@@ -14,7 +14,7 @@ struct DriversView: View {
     var body: some View {
         
         if self.presenter.arrayDrivers.isEmpty{
-            ProgressView("Loading")
+            ProgressView(LocalizedKeys.General.progressText)
                 .onAppear(perform: {
                     self.presenter.fetchDrivers()
                 })

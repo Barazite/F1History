@@ -14,7 +14,7 @@ struct SeasonsView: View {
     var body: some View {
         
         if self.presenter.arraySeasons.isEmpty{
-            ProgressView("Loading")
+            ProgressView(LocalizedKeys.General.progressText)
                 .onAppear(perform: {
                     self.presenter.fetchSeasons()
                 })

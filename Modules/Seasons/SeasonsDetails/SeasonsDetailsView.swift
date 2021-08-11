@@ -92,7 +92,7 @@ struct ScheduleList: View{
     var body: some View{
         VStack{
             if presenter.arraySchedule.isEmpty{
-                ProgressView("Loading")
+                ProgressView(LocalizedKeys.General.progressText)
             }else{
                 List{
                     ForEach(presenter.arraySchedule){ race in
@@ -119,7 +119,7 @@ struct DriversList: View{
     var body: some View{
         VStack{
             if presenter.arrayDrivers.isEmpty{
-                ProgressView("Loading")
+                ProgressView(LocalizedKeys.General.progressText)
             }else{
                 List{
                     ForEach(presenter.arrayDrivers){ driver in
@@ -147,7 +147,7 @@ struct ConstructorsList: View{
     var body: some View{
         VStack{
             if presenter.arrayConstructors.isEmpty{
-                ProgressView("Loading")
+                ProgressView(LocalizedKeys.General.progressText)
             }else{
                 List{
                     ForEach(presenter.arrayConstructors){ constructor in
@@ -210,9 +210,9 @@ struct DriverPosition: View {
             }
             if info{
                 HStack{
-                    Text("Wins: "+driver.wins!).padding()
+                    Text(LocalizedKeys.F1Text.standingsWinsText + ": " + driver.wins!).padding()
                     Spacer()
-                    Text("Team: "+driver.constructor!).padding()
+                    Text(LocalizedKeys.F1Text.standingsTeamText + ": "+driver.constructor!).padding()
                 }
             }
         }
@@ -243,7 +243,7 @@ struct ConstructorPosition: View {
             if info{
                 HStack{
                     Spacer()
-                    Text("Wins: "+constructor.wins!).padding()
+                    Text(LocalizedKeys.F1Text.standingsWinsText + ": " + constructor.wins!).padding()
                     Spacer()
                 }
             }

@@ -14,7 +14,7 @@ struct CircuitsView: View {
     var body: some View {
         
         if self.presenter.arrayCircuits.isEmpty{
-            ProgressView("Loading")
+            ProgressView(LocalizedKeys.General.progressText)
                 .onAppear(perform: {
                     self.presenter.fetchCircuits()
                 })

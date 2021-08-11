@@ -1,0 +1,23 @@
+/* 
+  Localizable.strings
+  F1History
+
+  Created by Adrian Sevilla Diaz on 11/8/21.
+  
+*/
+//General
+"ProgressText" = "Cargando";
+"WebViewText" = "Hecho";
+
+
+//F1 Text
+"StandingsWinsText" = "Victorias";
+"StandingsTeamText" = "Equipo";
+"Seasons" = "Temporadas";
+"Drivers" = "Pilotos";
+"Constructors" = "Constructores";
+"Circuits" = "Circuitos";
+
+//SliderMenuText
+"Profile" = "Perfil";
+"Favorites" = "Favoritos";

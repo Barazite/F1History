@@ -40,32 +40,23 @@ struct SliderMenuView: View {
                     Image(systemName: "person")
                         .foregroundColor(.black)
                         .imageScale(.large)
-                    Text("Profile")
+                    Text(LocalizedKeys.SliderMenuText.profileText)
                         .foregroundColor(.black)
                         .font(.headline)
                     Spacer()
                 }
                 .padding(.top, 50)
                 HStack {
-                    Image(systemName: "envelope")
+                    Image(systemName: "star")
                         .foregroundColor(.black)
                         .imageScale(.large)
-                    Text("Messages")
+                    Text(LocalizedKeys.SliderMenuText.favoritesText)
                         .foregroundColor(.black)
                         .font(.headline)
                     Spacer()
                 }
                 .padding(.top, 30)
-                HStack {
-                    Image(systemName: "gear")
-                        .foregroundColor(.black)
-                        .imageScale(.large)
-                    Text("Settings")
-                        .foregroundColor(.black)
-                        .font(.headline)
-                    Spacer()
-                }
-                .padding(.top, 30)
+        
                 Spacer()
             }
             .padding(.horizontal)

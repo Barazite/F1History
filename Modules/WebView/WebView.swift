@@ -21,7 +21,7 @@ struct WebViewHome: View {
                 .navigationBarItems(trailing: Button(action: {
                     self.showWiki = false
                 }) {
-                    Text("Done").bold().foregroundColor(.white)
+                    Text(LocalizedKeys.General.webViewText).bold().foregroundColor(.white)
                 })
         }
     }
