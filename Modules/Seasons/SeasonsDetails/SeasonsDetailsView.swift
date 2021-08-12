@@ -11,7 +11,7 @@ struct SeasonsDetailsView: View {
     
     @SwiftUI.Environment(\.presentationMode) var presentMode
     @ObservedObject var presenter = SeasonsDetailsPresenterImpl()
-    private var tabs = ["calendar", "rectangle.stack.person.crop", "person.2.square.stack"]
+    private var tabs = ["calendar", "standingsdriver", "standingsteam"]
     @State private var selected = "calendar"
     
     init() {
@@ -24,40 +24,24 @@ struct SeasonsDetailsView: View {
             VStack{
                 HStack(){
                     ForEach(tabs, id: \.self){ image in
-                        VStack(spacing: 5){
-                            Button(action: {
-                                withAnimation(.spring()){
-                                    selected = image
-                                }
-                            }, label: {
-                                Image(systemName: image)
-                                    .resizable()
-                                    .frame(width: reader.size.height/15, height: reader.size.height/15, alignment: .center)
-                                    .foregroundColor(.white)
-                            })
-                        
-                            Rectangle().fill(selected == image ? Color.white : Color.clear).frame(height: 5)
-                            
+                        TabButton(title: image, selectedTab: $selected)
+                        if image != tabs.last{
+                            Spacer(minLength: 0)
                         }
-                        .padding(.top, 15)
-                        .frame(height: reader.size.height/10)
-                        //.padding(.horizontal)
                     }
                 }
-                .frame(height: reader.size.height/10)
-                .frame(maxWidth: .infinity)
+                .padding(.horizontal, 30)
                 .background(Color.barColor)
-                .padding(0)
                 
                 TabView(selection: $selected){
                     ScheduleList(presenter: self.presenter)
                         .tag("calendar")
                     
                     DriversList(presenter: self.presenter)
-                        .tag("rectangle.stack.person.crop")
+                        .tag("standingsdriver")
                     
                     ConstructorsList(presenter: self.presenter)
-                        .tag("person.2.square.stack")
+                        .tag("standingsteam")
                                         
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
@@ -82,6 +66,44 @@ struct SeasonsDetailsView: View {
 struct SeasonsDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         SeasonsDetailsView()
+    }
+}
+
+
+struct TabButton: View {
+    var title: String
+    @Binding var selectedTab: String
+    
+    var body: some View{
+        Button(action: {
+            withAnimation(.spring()){
+                selectedTab = title
+            }
+        }, label: {
+            VStack(spacing: 6){
+                Image(title)
+                    .renderingMode(.template)
+                    .resizable()
+                    .foregroundColor(.white)
+                    .frame(width: 30, height: 30)
+                Text(title.localized)
+                    .font(.caption2)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                
+                CustomSelectionShape()
+                    .fill(selectedTab == title ? Color.white : Color.clear)
+                    .frame(width: 70, height: 6)
+            }
+            .padding(.top, 5)
+        })
+    }
+}
+
+struct CustomSelectionShape: Shape {
+    func path(in rect: CGRect) -> Path {
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: [.topLeft,.topRight], cornerRadii: CGSize(width: 10, height: 10))
+        return Path(path.cgPath)
     }
 }
 

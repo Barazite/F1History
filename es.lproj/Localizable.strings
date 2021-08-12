@@ -21,3 +21,8 @@
 //SliderMenuText
 "Profile" = "Perfil";
 "Favorites" = "Favoritos";
+
+//No struct Keys
+"calendar" = "Calendario";
+"standingsteam" = "Cl. Equipos";
+"standingsdriver" = "Cl. Pilotos";
