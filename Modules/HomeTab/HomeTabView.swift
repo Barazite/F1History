@@ -13,6 +13,14 @@ struct HomeTabView: View {
     @State private var xAxis: CGFloat = 45
     @State private var showSlide = false
     
+    //SlideMenu UIImage
+    @State private var imagen = UIImage()
+    
+    //Navigation
+    @State private var showImagePicker = false
+    @State private var showFavorites = false
+    @State private var showProfile = false
+    
     init() {
         UITabBar.appearance().isHidden = true
         UINavigationBar.appearance().barTintColor = UIColor(Color.barColor)
@@ -47,19 +55,33 @@ struct HomeTabView: View {
                         
                     }
                     
-                    SliderMenuView()
+                    SliderMenuView(image: $imagen, optionSelected: { option in
+                        getDestination(itemSelected: option)
+                    })
                         .frame(width: geometry.size.width * 3/4)
                         .offset(x: self.showSlide ? 0 : -geometry.size.width)
                         .animation(.default)
                 }
-                /*.animation(Animation.easeIn.delay(0.25))
+                .sheet(isPresented: $showImagePicker) {
+                    ImagePicker(selectedImage: $imagen)
+                }
+                .fullScreenCover(isPresented: $showFavorites, content: {
+                    Text("Favorites")
+                })
+                .fullScreenCover(isPresented: $showProfile, content: {
+                    Text("Profile")
+                })
                 .gesture(DragGesture().onEnded({ (drag) in
-                    if drag.translation.width < -100{
-                        self.showSlide = false
+                    if drag.translation.width < geometry.size.width/3{
+                        withAnimation(.spring()){
+                            self.showSlide = false
+                        }
                     }else{
-                        self.showSlide = true
+                        withAnimation(.spring()){
+                            self.showSlide = true
+                        }
                     }
-                }))*/
+                }))
                 .ignoresSafeArea(.all, edges: .bottom)
                 .navigationBarTitle("F1 History", displayMode: .inline)
                 .navigationBarItems(leading:
@@ -75,6 +97,19 @@ struct HomeTabView: View {
                                         })
                 )
             }
+        }
+    }
+    
+    private func getDestination(itemSelected: String){
+        switch MenuOption(rawValue: itemSelected){
+        case .ImagePicker:
+            showImagePicker = true
+        case .Favorites:
+            showFavorites = true
+        case .Profile:
+            showProfile = true
+        case .none:
+            print("nada")
         }
     }
 }

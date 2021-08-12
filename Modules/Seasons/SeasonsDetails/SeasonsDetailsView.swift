@@ -32,7 +32,7 @@ struct SeasonsDetailsView: View {
                 }
                 .padding(.horizontal, 30)
                 .background(Color.barColor)
-                
+                                
                 TabView(selection: $selected){
                     ScheduleList(presenter: self.presenter)
                         .tag("calendar")
@@ -68,6 +68,7 @@ struct SeasonsDetailsView_Previews: PreviewProvider {
         SeasonsDetailsView()
     }
 }
+
 
 
 struct TabButton: View {
@@ -223,7 +224,7 @@ struct DriverPosition: View {
                 Spacer()
                 Text(driver.points!).font(.title3).bold()
                 Button(action: {
-                    withAnimation(){
+                    withAnimation(.easeInOut(duration: 0.5)){
                         info.toggle()
                     }
                 }, label: {
@@ -255,7 +256,7 @@ struct ConstructorPosition: View {
                 Spacer()
                 Text(constructor.points!).font(.title3).bold()
                 Button(action: {
-                    withAnimation(){
+                    withAnimation(.spring()){
                         info.toggle()
                     }
                 }, label: {
