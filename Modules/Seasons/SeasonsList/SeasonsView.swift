@@ -23,7 +23,7 @@ struct SeasonsView: View {
                 LazyVGrid(columns: Array(repeating: GridItem(), count: 2)){
                     ForEach(self.presenter.arraySeasons){ season in
                         NavigationLink(
-                            destination: SeasonsDetailsCoordinator.buildView(season: season.season ?? "")){
+                            destination: SeasonsDetailsCoordinator.buildView(season: season)){
                             SeasonCard(item: season)
                                 .padding()
                                 .onAppear(perform: {

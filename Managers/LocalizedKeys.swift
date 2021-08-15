@@ -28,9 +28,3 @@ struct LocalizedKeys {
         static let favoritesText = "Favorites".localized
     }
 }
-
-extension String{
-    public var localized: String{
-        return NSLocalizedString(self, comment: "")
-    }
-}

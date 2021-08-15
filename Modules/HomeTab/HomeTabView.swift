@@ -63,13 +63,13 @@ struct HomeTabView: View {
                         .animation(.default)
                 }
                 .sheet(isPresented: $showImagePicker) {
-                    ImagePicker(selectedImage: $imagen)
+                    ImagePicker(selectedImage: $imagen, showImagePicker: $showImagePicker)
                 }
                 .fullScreenCover(isPresented: $showFavorites, content: {
-                    Text("Favorites")
+                    FavoritesView(showFavorites: $showFavorites)
                 })
-                .fullScreenCover(isPresented: $showProfile, content: {
-                    Text("Profile")
+                .sheet(isPresented: $showProfile, content: {
+                    ProfileView(showProfile: $showProfile)
                 })
                 .gesture(DragGesture().onEnded({ (drag) in
                     if drag.translation.width < geometry.size.width/3{
@@ -194,8 +194,4 @@ struct CustomShape: Shape {
             path.addCurve(to: to2, control1: control3, control2: control4)
         }
     }
-}
-
-extension Color{
-    static let barColor = Color(red: 250/255, green: 128/255, blue: 114/255)
 }

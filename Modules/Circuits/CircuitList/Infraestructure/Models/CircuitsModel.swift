@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Circuits: Identifiable {
+struct Circuits: Identifiable, Codable {
     let id: String?
     let url: String?
     let circuitName: String?

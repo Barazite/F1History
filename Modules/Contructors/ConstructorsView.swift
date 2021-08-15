@@ -46,6 +46,7 @@ struct ConstructorCard: View {
     var constructor: Constructors
     @ObservedObject var imageManager = ImageManager()
     @State var showWiki = false
+    @State var favorite = false
     
     init(item: Constructors){
         self.constructor = item
@@ -56,12 +57,22 @@ struct ConstructorCard: View {
         VStack{
             HStack{
                 Button(action: {
-                    
+                    if favorite{
+                        FavoritesManager.shared.deleteConstructor(constructor: constructor)
+                        favorite = false
+                    }else{
+                        FavoritesManager.shared.saveConstructor(constructor: constructor)
+                        favorite = true
+                    }
                 }, label: {
-                    Image(systemName: "star")
+                    Image(systemName: favorite ? "star.fill" : "star")
                         .resizable()
                         .frame(width: 40, height: 40)
-                }).foregroundColor(.yellow)
+                })
+                .onAppear(perform: {
+                    self.favorite = FavoritesManager.shared.findConstructor(constructor: constructor)
+                })
+                .foregroundColor(.yellow)
                 
                 Spacer()
                 

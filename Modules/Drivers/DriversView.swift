@@ -46,6 +46,7 @@ struct DriverCard: View {
     var driver : Drivers
     @ObservedObject var imageManager = ImageManager()
     @State var showWiki = false
+    @State var favorite = false
     
     init(item: Drivers){
         self.driver = item
@@ -57,12 +58,22 @@ struct DriverCard: View {
         VStack{
             HStack{
                 Button(action: {
-                    
+                    if favorite{
+                        FavoritesManager.shared.deleteDriver(driver: driver)
+                        favorite = false
+                    }else{
+                        FavoritesManager.shared.saveDriver(driver: driver)
+                        favorite = true
+                    }
                 }, label: {
-                    Image(systemName: "star")
+                    Image(systemName: favorite ? "star.fill" : "star")
                         .resizable()
                         .frame(width: 40, height: 40)
-                }).foregroundColor(.yellow)
+                })
+                .onAppear(perform: {
+                    self.favorite = FavoritesManager.shared.findDriver(driver: self.driver)
+                })
+                .foregroundColor(.yellow)
                 
                 Spacer()
                 VStack{

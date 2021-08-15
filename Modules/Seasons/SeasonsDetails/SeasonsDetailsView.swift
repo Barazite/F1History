@@ -13,6 +13,7 @@ struct SeasonsDetailsView: View {
     @ObservedObject var presenter = SeasonsDetailsPresenterImpl()
     private var tabs = ["calendar", "standingsdriver", "standingsteam"]
     @State private var selected = "calendar"
+    @State var favorite = false
     
     init() {
         UITabBar.appearance().isHidden = true
@@ -32,7 +33,7 @@ struct SeasonsDetailsView: View {
                 }
                 .padding(.horizontal, 30)
                 .background(Color.barColor)
-                                
+                
                 TabView(selection: $selected){
                     ScheduleList(presenter: self.presenter)
                         .tag("calendar")
@@ -42,7 +43,7 @@ struct SeasonsDetailsView: View {
                     
                     ConstructorsList(presenter: self.presenter)
                         .tag("standingsteam")
-                                        
+                    
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             }
@@ -58,7 +59,24 @@ struct SeasonsDetailsView: View {
                                     }, label: {
                                         Image(systemName: "chevron.left").foregroundColor(.white)
                                     })
-            )
+                                , trailing:
+                                    Button(action: {
+                                        if favorite{
+                                            FavoritesManager.shared.deleteSeason(season: presenter.season!)
+                                            favorite = false
+                                        }else{
+                                            FavoritesManager.shared.saveSeason(season: presenter.season!)
+                                            favorite = true
+                                        }
+                                    }, label: {
+                                        Image(systemName: favorite ? "star.fill" : "star")
+                                            .resizable()
+                                            .frame(width: 40, height: 40)
+                                    })
+                                    .onAppear(perform: {
+                                        self.favorite = FavoritesManager.shared.findSeason(season: presenter.season!)
+                                    })
+                                    .foregroundColor(.yellow))
         }
     }
 }

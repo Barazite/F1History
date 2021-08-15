@@ -14,18 +14,29 @@ struct CircuitDetailsView: View {
     @ObservedObject var presenter = CircuitDetailsPresenterImpl()
     @ObservedObject var imageManager = ImageManager()
     @State var showWiki = false
+    @State var favorite = false
     
     
     var body: some View {
         VStack{
             HStack{
                 Button(action: {
-                    
+                    if favorite{
+                        FavoritesManager.shared.deleteCircuit(circuit: presenter.circuit!)
+                        favorite = false
+                    }else{
+                        FavoritesManager.shared.saveCircuit(circuit: presenter.circuit!)
+                        favorite = true
+                    }
                 }, label: {
-                    Image(systemName: "star")
+                    Image(systemName: favorite ? "star.fill" : "star")
                         .resizable()
                         .frame(width: 40, height: 40)
-                }).foregroundColor(.yellow)
+                })
+                .onAppear(perform: {
+                    self.favorite = FavoritesManager.shared.findCircuit(circuit: presenter.circuit!)
+                })
+                .foregroundColor(.yellow)
                 
                 Spacer()
                 

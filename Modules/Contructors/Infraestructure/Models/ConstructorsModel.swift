@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Constructors: Identifiable {
+struct Constructors: Identifiable, Codable {
     let id: String?
     let url: String?
     let name, nationality: String?

@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct Drivers: Identifiable {
+struct Drivers: Identifiable, Codable{
     let id: String?
     let url: String?
     let givenName, familyName, dateOfBirth, nationality: String?
     let permanentNumber: String?
-
+    
     init(businessModel: Driver){
         self.id = businessModel.driverID
         self.url = businessModel.url

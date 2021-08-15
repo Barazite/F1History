@@ -7,12 +7,13 @@
 
 import Foundation
 
-struct Seasons: Identifiable {
-    let id = UUID()
+struct Seasons: Identifiable, Codable{
+    let id : UUID
     let season: String?
     let url: String?
     
     init(businessModel: Season){
+        self.id = UUID()
         self.season = businessModel.season
         self.url = businessModel.url
     }

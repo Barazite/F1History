@@ -15,7 +15,7 @@ protocol SeasonsDetailsInteractorOutputProtocol: BaseInteractorOutputProtocol {
 
 class SeasonsDetailsPresenterImpl: BasePresenter, ObservableObject{
     
-    var season: String = ""
+    var season: Seasons?
     
     @Published var arraySchedule: [SchedulesModel] = []
     @Published var arrayDrivers: [DriverStandingModel] = []
@@ -37,15 +37,15 @@ class SeasonsDetailsPresenterImpl: BasePresenter, ObservableObject{
 //    }
     
     func fetchSchedules(){
-        self.interactor?.fetchSchedulesInteractor(season: self.season, offset: "\(offsetShedule)")
+        self.interactor?.fetchSchedulesInteractor(season: (self.season?.season)!, offset: "\(offsetShedule)")
     }
     
     func fetchDrivers(){
-        self.interactor?.fetchDriversInteractor(season: self.season, offset: "\(offsetDriver)")
+        self.interactor?.fetchDriversInteractor(season: (self.season?.season)!, offset: "\(offsetDriver)")
     }
     
     func fetchConstructors(){
-        self.interactor?.fetchConstructorsInteractor(season: self.season, offset: "\(offsetConstructor)")
+        self.interactor?.fetchConstructorsInteractor(season: (self.season?.season)!, offset: "\(offsetConstructor)")
     }
 }
 

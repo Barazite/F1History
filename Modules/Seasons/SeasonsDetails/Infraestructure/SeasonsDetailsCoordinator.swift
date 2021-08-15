@@ -9,13 +9,13 @@ import Foundation
 import SwiftUI
 
 final class SeasonsDetailsCoordinator: BaseCoordinator{
-    static func navigation(season: String) -> NavigationView<SeasonsDetailsView>{
+    static func navigation(season: Seasons) -> NavigationView<SeasonsDetailsView>{
         let customNavigationView = NavigationView{
             self.buildView(season: season)
         }
         return customNavigationView
     }
-    static func buildView(season: String) -> SeasonsDetailsView{
+    static func buildView(season: Seasons) -> SeasonsDetailsView{
         var view = SeasonsDetailsView()
         let vip = BaseCoordinator.assembly(presenter: SeasonsDetailsPresenterImpl.self, interactor: SeasonsDetailsInteractorImpl.self)
         view.presenter = vip.presenter
