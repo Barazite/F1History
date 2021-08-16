@@ -60,6 +60,7 @@ struct FavoritesView: View {
                             Text(LocalizedKeys.F1Text.driversText)
                         }
                     }.padding()
+                    //.background(Color.red)
                     
                     DisclosureGroup{
                             ForEach(self.constructors){ constructor in

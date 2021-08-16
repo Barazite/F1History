@@ -76,12 +76,6 @@ struct DriverCard: View {
                 .foregroundColor(.yellow)
                 
                 Spacer()
-                VStack{
-                    Text(driver.givenName ?? "").font(.title)
-                    Text(driver.familyName ?? "").font(.title3)
-                    Text(driver.dateOfBirth ?? "").font(.callout)
-                }
-                Spacer()
                 
                 Button(action: {
                     showWiki.toggle()
@@ -96,10 +90,25 @@ struct DriverCard: View {
                 }){
                     WebViewHome(showWiki: $showWiki, url: driver.url!)
                 }
-                
-                
-                
-            }.padding(.all, 8)
+            }
+            
+            HStack{
+                Spacer()
+                VStack{
+                    Text(driver.givenName ?? "").font(.title3)
+                    Text(driver.familyName ?? "").font(.title).bold()
+                    Text((driver.dateOfBirth?.toDateFormat())!).font(.callout)
+                    if driver.permanentNumber != nil{
+                        Text(driver.permanentNumber!)
+                            .font(Font.system(size: 20))
+                            .padding(.all, 8)
+                            .overlay(
+                                Circle().stroke(Color.black)
+                            )
+                    }
+                }
+                Spacer()
+            }.padding(.top, -45)
             
             HStack{
                 Image(uiImage: (self.imageManager.data.isEmpty ? UIImage(systemName: "person.fill") : UIImage(data: self.imageManager.data))!)
@@ -109,24 +118,16 @@ struct DriverCard: View {
                     .clipShape(Circle())
                 
                 Spacer()
-                if driver.permanentNumber != nil{
-                    Text(driver.permanentNumber!)
-                        .font(Font.system(size: 50))
-                        .padding(.all, 8)
-                        .overlay(
-                            Circle().stroke(Color.black)
-                        )
-                }
-                Spacer()
                 
                 Image(uiImage: (self.imageManager.flag.isEmpty ? UIImage(systemName: "photo") : UIImage(data: self.imageManager.flag))!)
                     .resizable()
                     .frame(width: 70, height: 60)
                     .scaledToFill()
                 
-            }.padding(.all, 8)
+            }.padding(.horizontal, 8).padding(.top, -15)
+            
         }
-        .padding()
-        .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.black, lineWidth: 1).padding(.all, 5))
+        .padding(.all, 12)
+        .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.black, lineWidth: 1))
     }
 }

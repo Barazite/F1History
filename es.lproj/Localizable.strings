@@ -26,3 +26,7 @@
 "calendar" = "Calendario";
 "standingsteam" = "Cl. Equipos";
 "standingsdriver" = "Cl. Pilotos";
+
+//Profile
+"name" = "Nombre: ";
+"enter_name" = "Introduzca su nombre";

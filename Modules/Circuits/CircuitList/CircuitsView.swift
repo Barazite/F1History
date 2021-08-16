@@ -57,7 +57,7 @@ struct CircuitCard: View {
     
     var body: some View{
             VStack{
-                Text(circuit.circuitName ?? "").font(.title3)
+                Text(circuit.circuitName ?? "").font(.title3).bold().multilineTextAlignment(.center)
                     .multilineTextAlignment(.center)
                     .padding()
                 

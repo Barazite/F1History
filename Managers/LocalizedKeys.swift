@@ -27,4 +27,9 @@ struct LocalizedKeys {
         static let profileText = "Profile".localized
         static let favoritesText = "Favorites".localized
     }
+    
+    struct ProfileText{
+        static let nameText = "name".localized
+        static let enterNameText = "enter_name".localized
+    }
 }

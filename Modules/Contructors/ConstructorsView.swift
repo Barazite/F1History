@@ -75,6 +75,8 @@ struct ConstructorCard: View {
                 .foregroundColor(.yellow)
                 
                 Spacer()
+                Text(constructor.name ?? "").font(.title).bold().multilineTextAlignment(.center)
+                Spacer()
                 
                 Button(action: {
                     showWiki.toggle()
@@ -88,14 +90,7 @@ struct ConstructorCard: View {
                     WebViewHome(showWiki: $showWiki, url: constructor.url!)
                 }
             }
-            .padding(.all, 8)
-            
-            HStack{
-                Spacer()
-                Text(constructor.name ?? "").font(.title)
-                Spacer()
-            }
-            
+                        
             HStack{
                 Spacer()
                 Image(uiImage: (self.imageManager.flag.isEmpty ? UIImage(systemName: "photo") : UIImage(data: self.imageManager.flag))!)
@@ -104,10 +99,9 @@ struct ConstructorCard: View {
                     .scaledToFill()
                 Spacer()
             }
-            .padding(.all, 8)
         }
-        .padding()
-        .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.black, lineWidth: 1).padding(.all, 5))
+        .padding(.all, 12)
+        .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.black, lineWidth: 1))
     }
     
     func didDismiss() {

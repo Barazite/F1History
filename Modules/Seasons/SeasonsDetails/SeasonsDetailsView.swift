@@ -222,7 +222,7 @@ struct DateRace: View {
             HStack{
                 Text(race.circuitName!).font(.callout).multilineTextAlignment(.center).padding()
                 Spacer()
-                Text(race.date!).font(.callout)
+                Text((race.date?.toDateFormat())!).font(.callout)
             }.padding()
         }
     }

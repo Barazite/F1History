@@ -22,11 +22,11 @@ struct SliderMenuView: View {
                     .scaledToFit()
                     .clipShape(Circle())
                     .shadow(radius: 10)
-                    .overlay(Circle().stroke(Color.black, lineWidth: 3))
+                    .overlay(Circle().stroke(Color.barColor, lineWidth: 1))
                     .onAppear(perform: {
                         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
                         let documentsDirectory = paths[0]
-                        self.image = UIImage(contentsOfFile: documentsDirectory.appendingPathComponent("profile.jpg").path) ?? UIImage(named: "user")!
+                        self.image = UIImage(contentsOfFile: documentsDirectory.appendingPathComponent("profile.jpg").path) ?? UIImage(named: "f1")!
                     })
                 Button(action: {
                     self.optionSelected(MenuOption.ImagePicker.rawValue)
@@ -34,7 +34,7 @@ struct SliderMenuView: View {
                     Image(systemName: "pencil.circle")
                         .resizable()
                         .frame(width: 40, height: 40)
-                        .foregroundColor(.black)
+                        .foregroundColor(.white)
                         .offset(x: -30, y: 0)
                 })
                 
@@ -43,7 +43,7 @@ struct SliderMenuView: View {
             .padding()
             
             Divider()
-                .background(Color.black)
+                .background(Color.white)
             
             VStack{
                 Button(action: {
@@ -51,10 +51,10 @@ struct SliderMenuView: View {
                 }, label: {
                     HStack {
                         Image(systemName: "person")
-                            .foregroundColor(.black)
+                            .foregroundColor(.white)
                             .imageScale(.large)
                         Text(LocalizedKeys.SliderMenuText.profileText)
-                            .foregroundColor(.black)
+                            .foregroundColor(.white)
                             .font(.headline)
                         Spacer()
                     }
@@ -65,10 +65,10 @@ struct SliderMenuView: View {
                 }, label: {
                     HStack {
                         Image(systemName: "star")
-                            .foregroundColor(.black)
+                            .foregroundColor(.white)
                             .imageScale(.large)
                         Text(LocalizedKeys.SliderMenuText.favoritesText)
-                            .foregroundColor(.black)
+                            .foregroundColor(.white)
                             .font(.headline)
                         Spacer()
                     }
