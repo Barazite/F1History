@@ -1,0 +1,32 @@
+/* 
+  Localizable.strings
+  F1History
+
+  Created by Adrian Sevilla Diaz on 11/8/21.
+  
+*/
+//General
+"ProgressText" = "Loading";
+"WebViewText" = "Done";
+
+
+//F1 Text
+"StandingsWinsText" = "Wins";
+"StandingsTeamText" = "Team";
+"Seasons" = "Seasons";
+"Drivers" = "Drivers";
+"Constructors" = "Constructors";
+"Circuits" = "Circuits";
+
+//SliderMenuText
+"Profile" = "Profile";
+"Favorites" = "Favorites";
+
+//No struct Keys
+"calendar" = "Calendar";
+"standingsteam" = "Team Standings";
+"standingsdriver" = "Driver Standings";
+
+//Profile
+"name" = "Name: ";
+"enter_name" = "Enter your name";
